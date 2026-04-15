@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+:root {
+  --background: #05070d;
+  --foreground: #eef3ff;
+  --surface: #0a1120;
+  --primary: #2f6bff;
+  --accent: #8a4dff;
+  --secondary: #15d1ff;
+  --muted: #8f9db8;
+  --radius: 14px;
+  --shadow-elevated: 0 10px 30px rgba(9, 16, 34, 0.45);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), "Inter", sans-serif;
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(47, 107, 255, 0.14), transparent 36%),
+    radial-gradient(circle at 90% 20%, rgba(138, 77, 255, 0.12), transparent 34%);
+}
+
+.container-shell {
+  width: min(1100px, 92vw);
+  margin-inline: auto;
+}
+
+.surface-card {
+  background: linear-gradient(180deg, rgba(19, 28, 47, 0.9) 0%, rgba(10, 17, 32, 0.9) 100%);
+  border: 1px solid rgba(84, 105, 147, 0.3);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-elevated);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--secondary);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(120deg, var(--primary), var(--accent));
+  padding: 0.72rem 1.05rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid rgba(142, 165, 210, 0.35);
+  padding: 0.72rem 1.05rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+@keyframes rotatePhraseInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  72% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes cursorBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.rotating-phrase {
+  display: inline-block;
+  will-change: transform, opacity;
+  animation: rotatePhraseInOut 2.2s ease-in-out;
+}
+
+.rotating-cursor {
+  animation: cursorBlink 1s steps(1, end) infinite;
+}
+
+@keyframes heroPhraseInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  16% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  76% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes heroOrbPulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes heroRingFloat {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.98);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.06);
+    opacity: 0.8;
+  }
+}
+
+@keyframes heroGridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 36px 18px, 18px 36px;
+  }
+}
+
+.hero-phrase {
+  animation: heroPhraseInOut 2.2s ease-in-out;
+  will-change: transform, opacity;
+}
+
+.hero-orb-pulse {
+  animation: heroOrbPulse 5s ease-in-out infinite;
+}
+
+.hero-ring-float {
+  animation: heroRingFloat 6s ease-in-out infinite;
+}
+
+.hero-ring-float-delayed {
+  animation: heroRingFloat 6s ease-in-out 1.5s infinite;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(140, 163, 214, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 163, 214, 0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: heroGridDrift 16s linear infinite;
+}

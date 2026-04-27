@@ -49,8 +49,13 @@ export async function apiGet<T>(path: string): Promise<T> {
 
 export function getAssetUrl(path: string | null | undefined): string | null {
   if (!path) return null;
-  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  const trimmedPath = path.trim();
+  if (!trimmedPath) return null;
 
-  const cleanPath = path.startsWith("/") ? path : `/storage/${path}`;
-  return `${API_HOST_URL}${cleanPath}`;
+  if (trimmedPath.startsWith("http://") || trimmedPath.startsWith("https://")) return trimmedPath;
+
+  const normalizedPath = trimmedPath.replace(/^\.?\//, "");
+  const storageRelative = normalizedPath.replace(/^storage\//, "");
+
+  return `${API_HOST_URL}/storage/${storageRelative}`;
 }

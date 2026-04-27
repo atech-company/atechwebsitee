@@ -12,7 +12,13 @@ export function ProjectImageSlider({ images, title }: ProjectImageSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!sanitized.length) {
-    return null;
+    return (
+      <div className="mt-6">
+        <div className="flex h-72 w-full items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-[#0f1f35] via-[#111a2c] to-[#1c1f30] px-5 text-center text-sm font-medium text-white/75 md:h-96">
+          {title}
+        </div>
+      </div>
+    );
   }
 
   const current = sanitized[activeIndex];

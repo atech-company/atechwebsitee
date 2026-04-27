@@ -52,10 +52,18 @@ export function getAssetUrl(path: string | null | undefined): string | null {
   const trimmedPath = path.trim();
   if (!trimmedPath) return null;
 
-  if (trimmedPath.startsWith("http://") || trimmedPath.startsWith("https://")) return trimmedPath;
+  if (trimmedPath.startsWith("http://") || trimmedPath.startsWith("https://")) {
+    return trimmedPath;
+  }
 
-  const normalizedPath = trimmedPath.replace(/^\.?\//, "");
-  const storageRelative = normalizedPath.replace(/^storage\//, "");
+  const normalizedPath = trimmedPath
+    .replaceAll("\\", "/")
+    .replace(/^\.?\//, "");
+
+  const storageRelative = normalizedPath
+    .replace(/^public\//, "")
+    .replace(/^storage\/app\/public\//, "")
+    .replace(/^storage\//, "");
 
   return `${API_HOST_URL}/storage/${storageRelative}`;
 }

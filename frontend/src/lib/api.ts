@@ -65,5 +65,9 @@ export function getAssetUrl(path: string | null | undefined): string | null {
     .replace(/^storage\/app\/public\//, "")
     .replace(/^storage\//, "");
 
-  return `${API_HOST_URL}/storage/${storageRelative}`;
+  if (normalizedPath.startsWith("storage/") || normalizedPath.startsWith("public/storage/")) {
+    return `${API_HOST_URL}/storage/${storageRelative}`;
+  }
+
+  return `${API_HOST_URL}/${storageRelative}`;
 }
